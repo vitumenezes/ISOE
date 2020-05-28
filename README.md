@@ -8,3 +8,5 @@ Just curiosity.
 ## Viewed (not necessarialy finalized) Topics 
 
 * SAMBA Server
+
+* Docker
