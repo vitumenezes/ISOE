@@ -80,3 +80,26 @@ Como criar (exemplo): `docker create -v /data --name dbdados centos`
 
 Para importar os volumes do container criado utiliza-se o parâmetro `--volumes-from "container"`
 
+---
+
+## DockerFile
+
+Pra quem já sofreu fazendo makefiles: surpresa! Segue a mesma ideia.
+
+*Alguns parâmetros*
+
+**FROM**: determina qual imagem base será usada para montar a imagem desejada
+**RUN**: serve para executar comandos dentro do container
+> Geralmente usado para instalar pacotes, afins.
+> Quanto menos RUNs, melhor. Cada novo RUN é uma nova camada. Então é interessante concatenar o máximo de comandos possíveis.
+**ADD**: copia arquivo/diretorio/arquivos *.tar* da máquina host para o container
+**CMD**: parâmetro do entrypoint
+**LABEL**: colocar metadatas no container
+**COPY**: igual ao ADD, mas não envia arquivos *.tar*
+**ENTRYPOINT**: faz com que um processo seja o principal processo do container, caso o processo morra, o container morre também
+**ENV**: serve para determinar variáveis de ambiente para o container
+**EXPOSE**: mostra qual porta do container precisa ser exposta
+**USER**: qual será o usuário default da máquina
+**WORKDIR**: diretório de trabalho do container (onde você vai cair assim que inicia o container
+**VOLUME**: cria um volume no container
+**MAINTAINER**: o escritor do dockerfile
