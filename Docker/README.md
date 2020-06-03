@@ -1,59 +1,82 @@
-DOCKER
+# DOCKER
 
-Pra rodar esta bagaça com sudo é necessário criar um grupo "docker" (com sudo obviamente) e adicionar seu usuário lá.
+---
 
-Parâmetros importantes do docker:
- -t (terminal)
- -i (iteratividade)
- -ti (um fodendo terminal iterativo)
- -d (container rodando como um processo em BG, um daemon)
+Pra rodar com sudo é necessário criar um grupo "docker" (com sudo obviamente) e adicionar seu usuário lá.
 
-Os dois pontos ":" após o nome da imagem indica a versão a ser buscada. Exemplo: centos:7
+###### Parâmetros importantes do docker:
+ 
+   -t (terminal)
+   -i (iteratividade)
+   -ti (um fodendo terminal iterativo)
+   -d (container rodando como um processo em BG, um daemon)
 
-Se utilizar o ctrl+D pra sair do container, o processo do shell vai ser parado e maquina vai ser fechada. Pra sair e deixar o container rodando tem que usar o ctrl+p+q.
+Os dois pontos ":" após o nome da imagem indicam a versão a ser buscada. Exemplo: `centos:7`
 
-Pra voltar pro container: docker attach "id_container".
+Se utilizar o ctrl+D pra sair do container, o processo do shell vai ser parado e maquina vai ser fechada. Pra sair e deixar o container rodando tem que usar o `ctrl+p+q`
 
-O docker create "container" apenas cria o container mas não roda automaticamente.
+Pra voltar pro container: `docker attach "id_container"`
 
-Listar containers rodando: docker ps
+> O docker create "container" apenas cria o container mas não roda automaticamente.
 
-Para parar o container: docker stop "id_container".
+Listar containers rodando: `docker ps`
 
-Para iniciar: docker start "id_container".
+Para parar o container: `docker stop "id_container"`
 
-Para pausar: docker pause "id_container".
+Para iniciar: `docker start "id_container"`
 
-Para despausar: docker unpause "id_container".
+Para pausar: `docker pause "id_container"`
 
-Status do container: docker stats "id_container".
+Para despausar: `docker unpause "id_container"`
 
-Para saber os processos rodando nos containers: docker top "id_container".
+Status do container: `docker stats "id_container"`
 
-Para saber os logs de algum container: docker logs "id_container".
+Para saber os processos rodando nos containers: `docker top "id_container"`
 
-Para remover um container PARADO e não em execução: docker rm "id_container".
+Para saber os logs de algum container: `docker logs "id_container"`
 
-Se estiver rodando, usar o "-f".
+Para remover um container PARADO e não em execução: `docker rm "id_container"`
 
-COMO LIMITAR RECURSOS
+> Se estiver rodando, usar o "-f".
 
-Importante: o comando docker inspect "id_container" mostra todas as informações do container, e utilizando este comando com pipes dá pra verificar apenas as informações desejadas ;)
+---
 
-Memória RAM:
+## COMO LIMITAR RECURSOS
 
-É possível colocar limitação de memória ram na criação dele utilziando o --memory (ou -m) "quantidade_memoria"
+**Importante: o comando docker inspect "id_container" mostra todas as informações do container, e utilizando este comando com pipes dá pra verificar apenas as informações desejadas ;)**
 
-Para alterar o valor de memória em um container já em utilização: docker update -m "quantidade_memoria" "id_container"
+### Memória RAM:
 
-Limitar CPU:
+É possível colocar limitação de memória ram na criação dele utilizando o `--memory (ou -m) "quantidade_memoria"`
 
-A limitação de uso de cpu não é tããão intuitiva assim. Vou reescrever essa parte depois que tiver entendido 100%, mas aqui vão os comandos:
+Para alterar o valor de memória em um container já em utilização: `docker update -m "quantidade_memoria" "id_container"`
 
-Limitar na criação: usar flag --cpu-shares "quantidade_em_mb"
+### Limitar CPU:
 
-Limitar com container já rodando: update --cpu-shares "quantidade_em_mb" "id_container"
+*A limitação de uso de cpu não é tããão intuitiva assim. Vou reescrever essa parte depois que tiver entendido 100%, mas aqui vão os comandos:*
 
-VOLUMES
+Limitar na criação: usar flag `--cpu-shares "quantidade_em_mb"`
 
+Limitar com container já rodando: `update --cpu-shares "quantidade_em_mb" "id_container"`
+
+---
+
+## VOLUMES
+
+Um volume no docker é um filesystem que está montado dentro container, mas que na verdade está no host docker e sendo compartilhado.
+
+Subindo um container especificando um volume (exemplo): `docker run -ti -v /volume /bin/bash`
+
+Para ver onde está montado o novo volume no host: `docker inspect -f {{.Mounts}} "container_id"`
+
+Apontar um novo volume para um diretório existente no host (mapeamento) (exemplo): `docker run -ti -v /path/do/diretorio:/volume debian`
+
+### Container Data_Only
+
+Container que possui volumes que serão compartilhados com outros containers.
+
+Como criar (exemplo): `docker create -v /data --name dbdados centos`
+> O container é criado apenas, não fica em execução.
+
+Para importar os volumes do container criado utiliza-se o parâmetro `--volumes-from "container"`
 
