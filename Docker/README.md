@@ -4,12 +4,12 @@
 
 Pra rodar com sudo é necessário criar um grupo "docker" (com sudo obviamente) e adicionar seu usuário lá.
 
-###### Parâmetros importantes do docker:
+## Parâmetros importantes do docker:
  
-   -t (terminal)
-   -i (iteratividade)
-   -ti (um fodendo terminal iterativo)
-   -d (container rodando como um processo em BG, um daemon)
+   -t (terminal) 
+   -i (iteratividade) 
+   -ti (um fodendo terminal iterativo) 
+   -d (container rodando como um processo em BG, um daemon) 
 
 Os dois pontos ":" após o nome da imagem indicam a versão a ser buscada. Exemplo: `centos:7`
 
@@ -43,7 +43,7 @@ Para remover um container PARADO e não em execução: `docker rm "id_container"
 
 ## COMO LIMITAR RECURSOS
 
-**Importante: o comando docker inspect "id_container" mostra todas as informações do container, e utilizando este comando com pipes dá pra verificar apenas as informações desejadas ;)**
+Importante: o comando docker inspect "id_container" mostra todas as informações do container, e utilizando este comando com pipes dá pra verificar apenas as informações desejadas ;)
 
 ### Memória RAM:
 
@@ -86,12 +86,13 @@ Para importar os volumes do container criado utiliza-se o parâmetro `--volumes-
 
 Pra quem já sofreu fazendo makefiles: surpresa! Segue a mesma ideia.
 
-### *Alguns parâmetros*
+### Alguns parâmetros
 
 **FROM**: determina qual imagem base será usada para montar a imagem desejada
 **RUN**: serve para executar comandos dentro do container
 > Geralmente usado para instalar pacotes, afins.
 > Quanto menos RUNs, melhor. Cada novo RUN é uma nova camada. Então é interessante concatenar o máximo de comandos possíveis.
+
 **ADD**: copia arquivo/diretorio/arquivos *.tar* da máquina host para o container
 **CMD**: parâmetro do entrypoint
 **LABEL**: colocar metadatas no container
