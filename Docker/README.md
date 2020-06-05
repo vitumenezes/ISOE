@@ -82,11 +82,11 @@ Para importar os volumes do container criado utiliza-se o parâmetro `--volumes-
 
 ---
 
-## DockerFile
+## DOCKERFILE
 
 Pra quem já sofreu fazendo makefiles: surpresa! Segue a mesma ideia.
 
-*Alguns parâmetros*
+### *Alguns parâmetros*
 
 **FROM**: determina qual imagem base será usada para montar a imagem desejada
 **RUN**: serve para executar comandos dentro do container
@@ -103,3 +103,34 @@ Pra quem já sofreu fazendo makefiles: surpresa! Segue a mesma ideia.
 **WORKDIR**: diretório de trabalho do container (onde você vai cair assim que inicia o container
 **VOLUME**: cria um volume no container
 **MAINTAINER**: o escritor do dockerfile
+
+### Como "buildar"
+
+Easy: `docker build "diretorio_do_dockerfile"`
+
+Importante colocar uma tag no momento da criação. Portanto: `docker build -t nome_imagem:1.0 "diretorio_do_dockerflie"`
+> -t nome_imagem:versao
+
+---
+
+## REDE NOS CONTAINERS
+
+O docker cria uma interface de rede chamada **docker0**. É por lá que ocorre toda a comunicação entre host e containers. Isso acontece quando ele está no modo bridge.
+
+### Parâmetros
+
+Passar um servidor dns para resolver as suas requisições (exemplo): `--dns 8.8.8.8`
+> classic! ;)
+
+Colocar um hostname *dentro* do container: `--hostname "nome"`
+
+Linkar um container com outro (exemplo): `--link "container-para-linkar"´
+> Assim um container "conhece" o outro, podendo pingar entre eles.
+
+Conexão entre porta do host com o container (exemplo): `--publish 8080:80`
+> Pode ser usado o -p também
+> Esse redirect quem faz é o iptables :D
+
+Passar um MAC address específico para o container: `--mac-address "en:de:re:ç:o:mac"`
+
+O `--net=host` faz com que todas as configurações de net do host sejam aplicadas no container.
