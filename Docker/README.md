@@ -2,7 +2,7 @@
 
 ---
 
-Pra rodar com sudo é necessário criar um grupo "docker" (com sudo obviamente) e adicionar seu usuário lá.
+Pra rodar sem sudo é necessário criar um grupo "docker" (com sudo obviamente) e adicionar seu usuário lá.
 
 ## Parâmetros importantes do docker:
  
